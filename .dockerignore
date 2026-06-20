@@ -1,0 +1,50 @@
+# Dependencias (se instalan dentro del contenedor)
+node_modules
+
+# Salida del build (se genera dentro del contenedor)
+dist
+
+# Tests
+src/**/*.test.ts
+src/**/*.spec.ts
+**/__tests__/**
+*.test.js
+*.spec.js
+
+# VCS / CI
+.git
+.gitignore
+.github
+.gitlab-ci.yml
+
+# Editores / IDEs
+.vscode
+.idea
+*.swp
+*.swo
+
+# Docker (no se necesitan dentro del contexto)
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# Documentación
+*.md
+docs
+
+# Secretos / env (mantenemos .env.example si existe)
+.env
+.env.*
+!.env.example
+
+# Logs y cachés
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.nyc_output
+coverage
+
+# SO
+.DS_Store
+Thumbs.db

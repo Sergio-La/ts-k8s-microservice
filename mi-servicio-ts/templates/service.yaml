@@ -1,0 +1,17 @@
+# Service de tipo ClusterIP: expone el microservicio dentro del clúster
+# Puerto 80 (Service) -> Puerto 3000 (contenedor)
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mi-servicio-ts.fullname" . }}
+  labels:
+    {{- include "mi-servicio-ts.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}        # puerto expuesto por el Service (80)
+      targetPort: {{ .Values.containerPort }}  # puerto del contenedor al que apunta (3000)
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "mi-servicio-ts.selectorLabels" . | nindent 4 }}

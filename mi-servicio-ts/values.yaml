@@ -1,0 +1,28 @@
+# Valores por defecto para mi-servicio-ts
+# Archivo YAML formateado y comentado para máxima legibilidad.
+
+# Número de réplicas del Deployment
+replicaCount: 2
+
+# Imagen del contenedor
+image:
+  repository: ts-k8s-microservice  # nombre de la imagen (sin tag)
+  tag: "latest"                     # tag de la imagen; en producción fija una versión concreta
+  pullPolicy: IfNotPresent          # solo descarga si no está en caché local
+
+# Puerto en el que escucha la aplicación dentro del contenedor
+containerPort: 3000
+
+# Configuración del Service de Kubernetes
+service:
+  type: ClusterIP  # tipo del Service (ClusterIP = solo accesible dentro del clúster)
+  port: 80         # puerto expuesto por el Service
+
+# Recursos asignados al contenedor (requests = garantía, limits = tope)
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 200m
+    memory: 256Mi

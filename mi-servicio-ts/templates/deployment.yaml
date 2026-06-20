@@ -1,0 +1,43 @@
+# Deployment del microservicio: gestiona los Pods y las réplicas
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mi-servicio-ts.fullname" . }}
+  labels:
+    {{- include "mi-servicio-ts.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "mi-servicio-ts.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "mi-servicio-ts.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # Puerto del contenedor en el que escucha la aplicación
+          ports:
+            - name: http
+              containerPort: {{ .Values.containerPort }}
+              protocol: TCP
+          # Liveness probe: reinicia el contenedor si /health no responde
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.containerPort }}
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          # Readiness probe: el Pod solo recibe tráfico cuando /health responde OK
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.containerPort }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          # Recursos (requests y limits desde values.yaml)
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

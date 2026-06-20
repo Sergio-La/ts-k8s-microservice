@@ -1,0 +1,19 @@
+# Override para entorno de desarrollo local (WSL)
+# Uso: helm install dev mi-servicio-ts -f values-dev.yaml
+# Sobrescribe solo los valores que cambian respecto a values.yaml
+
+# En dev basta con 1 réplica (ahorra recursos locales)
+replicaCount: 1
+
+# Imagen local compilada en WSL (tag "dev")
+image:
+  tag: "dev"
+
+# Recursos mínimos para desarrollo en WSL
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
