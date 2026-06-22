@@ -16,7 +16,7 @@ app.get('/health', (_req: Request, res: Response) => {
 
 // Endpoint de prueba funcional
 app.get('/api/v1/hello', (_req: Request, res: Response) => {
-    res.json({ message: "¡Hola! El microservicio está funcionando correctamente. v4" });
+    res.json({ message: "¡Hola! El microservicio está funcionando correctamente. v5" });
 });
 
 app.listen(port, () => {
