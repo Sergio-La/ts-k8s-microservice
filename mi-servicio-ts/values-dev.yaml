@@ -8,7 +8,7 @@ replicaCount: 1
 # Imagen publicada en Docker Hub por el CI/CD
 image:
   repository: selui2100/ts-k8s-microservice  # ruta completa en Docker Hub
-  tag: "build-20"                            # tag de la imagen con código v1 (baseline demo)
+  tag: "build-23"                            # tag de la imagen con código v1 (baseline demo)
 
 # Recursos mínimos para desarrollo en WSL
 resources:
